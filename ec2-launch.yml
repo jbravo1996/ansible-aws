@@ -33,9 +33,14 @@
         delay: 60
         timeout: 320
       loop: "{{ ec2.instances }}"
+      vars:
+        ansible_user: ec2-user
+
 
 - name: Configure instance(s)
   hosts: launched
+  vars:
+    ansible_user: ec2-user
   become: True
   gather_facts: True
   tasks:
