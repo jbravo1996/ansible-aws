@@ -1,0 +1,23 @@
+---
+- hosts: aws-instance
+  become: true
+  tasks:
+    - name: Install apache2 httpd
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Install git
+      yum:
+        name: git
+        state: latest
+
+    - name: Start apache2 service
+      service:
+        name: httpd
+        state: started
+
+    - name: Git vue-2048
+      git:
+        repo: https://github.com/jbravo1996/vue2048f.git
+        dest: /var/www/html/
