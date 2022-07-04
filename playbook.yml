@@ -18,6 +18,6 @@
         state: started
 
     - name: Git vue-2048
-      git:
-        repo: https://github.com/jbravo1996/vue2048f.git
+      copy:
+        src: /home/sinensia/vue2048-main/dist/
         dest: /var/www/html/
