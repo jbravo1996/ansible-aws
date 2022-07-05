@@ -69,5 +69,5 @@
       become: true
       service:
         name: myapp
-        enable: true
+        enabled: true
         state: started
