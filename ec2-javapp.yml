@@ -20,7 +20,7 @@
         vpc_subnet_id: subnet-08b5507d0a110f5ea
         assign_public_ip: yes
         instance_tags:
-          Name: FormacionAWS-httpd
+          Name: FormacionAWS-java
       register: ec2
 
     - name: Add new instance to host group
@@ -39,6 +39,10 @@
       vars:
         ansible_user: ec2-user
 
+# add into build.gradle
+# tasks.named('bootJar') {
+#    launchScript()
+# }
 
 - name: Configure instance(s)
   hosts: launched
@@ -47,17 +51,16 @@
   become: True
   gather_facts: True
   tasks:
-    - name: Install apache2 httpd
-      yum:
-        name: httpd
-        state: latest
+    - name: Install java
+      become: true
+      shell:  amazon-linux-extras install -y java-openjdk11
 
-    - name: Start apache2 service
-      service:
-        name: httpd
-        state: started
-
-    - name: Git vue-2048
+    - name: Copy java project
       copy:
-        src: /home/sinensia/vue2048-main/dist/
-        dest: /var/www/html/
+        src: /home/sinensia/hello-springrest/restservice/build/libs/restservice-0.0.1-SNAPSHOT.jar
+        dest: /var/myapp/
+
+    - name: Run project
+      become: true
+      shell: ln -s /var/myapp/rest-service-0.0.1-SNAPSHOT.jar /etc/init.d/myapp ; sudo chmod +x /etc/init.d/myapp ; service myapp start
+
