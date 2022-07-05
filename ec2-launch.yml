@@ -19,6 +19,8 @@
         region: "{{ region }}"
         vpc_subnet_id: subnet-08b5507d0a110f5ea
         assign_public_ip: yes
+        instance_tags:
+          Name: FormacionAWS
       register: ec2
 
     - name: Add new instance to host group
