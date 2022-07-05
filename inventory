@@ -1,2 +1,2 @@
 [aws-instance]
-34.246.161.15 ansible_user=ec2-user
+#ec2-public-ip ansible_user=ec2-user
