@@ -59,8 +59,15 @@
       copy:
         src: /home/sinensia/hello-springrest/restservice/build/libs/restservice-0.0.1-SNAPSHOT.jar
         dest: /var/myapp/
+        mode: '0755'
 
-    - name: Run project
+    - name: Symlynk project
       become: true
-      shell: ln -s /var/myapp/rest-service-0.0.1-SNAPSHOT.jar /etc/init.d/myapp ; sudo chmod +x /etc/init.d/myapp ; service myapp start
+      shell: ln -s /var/myapp/restservice-0.0.1-SNAPSHOT.jar /etc/init.d/myapp
 
+    - name: Start as a service
+      become: true
+      service:
+        name: myapp
+        enable: true
+        state: started
