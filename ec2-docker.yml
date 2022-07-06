@@ -82,8 +82,8 @@
 
     - name: Pull package from Dockerhub
       become: true
-      shell: docker-compose -f home/ec2-user/Docker/docker-compose.yml pull
+      shell: docker-compose -f /home/ec2-user/Docker/docker-compose.yml pull
 
     - name: Run docker-compose
       become: true
-      shell: docker-compose -f home/ec2-user/Docker/docker-compose.yml up -d --no-build
+      shell: docker-compose -f /home/ec2-user/Docker/docker-compose.yml up -d --no-build
